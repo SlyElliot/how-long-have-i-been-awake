@@ -20,7 +20,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 400px;
         }
 
         h1 {
@@ -40,6 +40,7 @@
             margin-bottom: 20px;
             border-radius: 4px;
             border: 1px solid #ccc;
+            align-items: center;
         }
 
         button {
@@ -106,16 +107,24 @@
         // Calculate alarm time for 8 hours of sleep if going to bed right now
         const wakeUpIfSleepNow = new Date(currentTime.getTime() + 8 * 60 * 60 * 1000);
 
+        // Helper function to format time without seconds
+        function formatTimeWithoutSeconds(date) {
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+        }
+
         // Display the result
         const resultDiv = document.getElementById('result');
         resultDiv.innerHTML = `
             <p>You have been awake for <strong>${hoursAwake} hours and ${minutesAwake} minutes</strong>.</p>
-            <p>To get 8 hours of sleep, consider going to bed around <strong>${recommendedSleepTime.toLocaleTimeString()}</strong>.</p>
-            <p>If you go to bed at the recommended time, set your alarm for <strong>${recommendedWakeTime.toLocaleTimeString()}</strong> to get 8 hours of sleep.</p>
-            <p>If you go to bed right now, set your alarm for <strong>${wakeUpIfSleepNow.toLocaleTimeString()}</strong> to get 8 hours of sleep.</p>
+            <p>To get 8 hours of sleep, consider going to bed around <strong>${formatTimeWithoutSeconds(recommendedSleepTime)}</strong>.</p>
+            <p>If you go to bed at the recommended time, set your alarm for <strong>${formatTimeWithoutSeconds(recommendedWakeTime)}</strong> to get 8 hours of sleep.</p>
+            <p>If you go to bed right now, set your alarm for <strong>${formatTimeWithoutSeconds(wakeUpIfSleepNow)}</strong> to get 8 hours of sleep.</p>
         `;
     }
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
