@@ -79,6 +79,9 @@
 </div>
 
 <script>
+import { injectSpeedInsights } from '@vercel/speed-insights';
+injectSpeedInsights();
+
     function calculateAwakeTime() {
         // Get the input wake time
         const wakeTimeInput = document.getElementById('wake-time').value;
