@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Long Have I Been Awake</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator-container">
+    <h1>Awake Time Calculator</h1>
+    <label for="wake-time">Enter the time you woke up:</label>
+    <input type="datetime-local" id="wake-time">
+    <button onclick="calculateAwakeTime()">Calculate</button>
+    
+    <div class="result" id="result">
+        <!-- Result will appear here -->
+    </div>
+</div>
+
+<script>
+    function calculateAwakeTime() {
+        // Get the input wake time
+        const wakeTimeInput = document.getElementById('wake-time').value;
+        if (!wakeTimeInput) {
+            alert("Please enter a wake-up time.");
+            return;
+        }
+
+        // Convert wake-up time to Date object
+        const wakeTime = new Date(wakeTimeInput);
+
+        // Get the current time
+        const currentTime = new Date();
+
+        // Calculate the difference in milliseconds
+        const diffInMs = currentTime - wakeTime;
+
+        // Convert milliseconds to hours and minutes
+        const hoursAwake = Math.floor(diffInMs / (1000 * 60 * 60));
+        const minutesAwake = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60));
+
+        // Calculate recommended sleep time (assuming 16 hours awake)
+        const recommendedSleepTime = new Date(wakeTime.getTime() + 16 * 60 * 60 * 1000);
+
+        // Display the result
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = `
+            <p>You have been awake for <strong>${hoursAwake} hours and ${minutesAwake} minutes</strong>.</p>
+            <p>To get 8 hours of sleep, consider going to bed around <strong>${recommendedSleepTime.toLocaleTimeString()}</strong>.</p>
+        `;
+    }
+</script>
+
+</body>
+</html>
