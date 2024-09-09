@@ -78,6 +78,13 @@
     </div>
 </div>
 
+ <!-- Add the module code directly in the HTML -->
+ <script type="module">
+    import { injectSpeedInsights } from '@vercel/speed-insights';
+
+    injectSpeedInsights();
+</script>
+
 <script>
 import { injectSpeedInsights } from '@vercel/speed-insights';
 injectSpeedInsights();
